@@ -24,6 +24,7 @@ namespace Printers.Controllers
             {
                 movement = db.Query<MovementView>("select * from dbo.MovementView order by id desc").ToList();
             }
+            ViewBag.Title = "Движение техники";
             ViewBag.Message = "История джижения техники. Где сейчас находится принтер, кто и когда его туда перенес.";
 
             return View(movement);

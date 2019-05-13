@@ -1,8 +1,18 @@
 ﻿@model IEnumerable<MovementView>
 
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>@ViewBag.Message</h4>
+
+<br />
+
 <p>
-    <a class="btn btn-primary btn-lg" @Html.ActionLink("Create New", "Create")</a>
+    <a class="btn btn-primary btn-lg btn-block" @Html.ActionLink("Добавить запись", "Create")</a>
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -17,6 +27,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CabinetOld)
         </th>
+        <td></td>
         <th>
             @Html.DisplayNameFor(model => model.BuildingNew)
         </th>
@@ -35,41 +46,43 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrinterBrand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrinterModel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BuildingOld)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CabinetOld)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BuildingNew)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CabinetNew)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MoveDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IP)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrinterBrand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrinterModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingOld)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CabinetOld)
+            </td>
+            <td>→</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingNew)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CabinetNew)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoveDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IP)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
