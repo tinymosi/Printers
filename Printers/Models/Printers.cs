@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-public class Printers
+public class Printer
 {
     public int ID { get; set; }
 

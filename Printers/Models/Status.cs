@@ -8,5 +8,5 @@ public class Status
 {
     public int ID { get; set; }
 
-    public string Status { get; set; }
+    public string StatusMsg { get; set; }
 }
