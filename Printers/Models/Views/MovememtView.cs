@@ -21,7 +21,7 @@ public class MovementView
     public string CabinetOld { get; set; }
 
     [Display(Name = "Новое здание")]
-    public string BildingNew { get; set; }
+    public string BuildingNew { get; set; }
 
     [Display(Name = "Новый кабинет")]
     public string CabinetNew { get; set; }
@@ -34,6 +34,6 @@ public class MovementView
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.mm.yyyy}")]
     public DateTime MoveDate { get; set; }
 
-    [Display(Name = "IP")]
+    [Display(Name = "IP-адрес")]
     public string IP { get; set; }
 }
