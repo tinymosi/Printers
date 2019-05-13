@@ -133,7 +133,7 @@
     <Compile Include="Models\Movement.cs" />
     <Compile Include="Models\Performers.cs" />
     <Compile Include="Models\PrintBrands.cs" />
-    <Compile Include="Models\Printers.cs" />
+    <Compile Include="Models\Printer.cs" />
     <Compile Include="Models\PrintModels.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Views\CabinetsView.cs" />
