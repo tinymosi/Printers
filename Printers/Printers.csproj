@@ -124,6 +124,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Buildings.cs" />
+    <Compile Include="Models\Cabinets.cs" />
+    <Compile Include="Models\Cartridges.cs" />
+    <Compile Include="Models\Movement.cs" />
+    <Compile Include="Models\Performers.cs" />
+    <Compile Include="Models\PrintBrands.cs" />
+    <Compile Include="Models\Printers.cs" />
+    <Compile Include="Models\PrintModels.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\Views\CabinetsView.cs" />
+    <Compile Include="Models\Views\CartridgesView.cs" />
+    <Compile Include="Models\Views\MovememtView.cs" />
+    <Compile Include="Models\Views\PrintersView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
