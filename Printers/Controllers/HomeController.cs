@@ -50,6 +50,19 @@ namespace Printers.Controllers
             return View(cabinets);
         }
 
-        
+
+        // Performers
+        public ActionResult Performers()
+        {
+            var performers = new List<Performers>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                performers = db.Query<Performers>("select * from dbo.Performers order by id").ToList();
+            }
+            ViewBag.Title = "Сотрудниик";
+            ViewBag.Message = "Список ответственных сотрудников организации.";
+
+            return View(performers);
+        }
     }
 }

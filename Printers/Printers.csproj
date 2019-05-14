@@ -178,6 +178,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Movement.cshtml" />
     <Content Include="Views\Home\Cabinets.cshtml" />
+    <Content Include="Views\Home\Performers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
