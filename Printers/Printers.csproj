@@ -182,6 +182,8 @@
     <Content Include="Views\Home\PerformersCreate.cshtml" />
     <Content Include="Views\Home\PerformersEdit.cshtml" />
     <Content Include="Views\Home\PerformersDelete.cshtml" />
+    <Content Include="Views\Home\Printers.cshtml" />
+    <Content Include="Views\Home\Cartridges.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

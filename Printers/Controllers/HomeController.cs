@@ -21,6 +21,7 @@ namespace Printers.Controllers
             return View();
         }
 
+        // Movement
         public ActionResult Movement()
         {
             var movement = new List<MovementView>();
@@ -33,6 +34,36 @@ namespace Printers.Controllers
             ViewBag.Message = "История джижения техники. Где сейчас находится принтер, кто и когда его туда перенес.";
 
             return View(movement);
+        }
+
+        // Printers
+        public ActionResult Printers()
+        {
+            var printers = new List<PrintersView>();
+
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                printers = db.Query<PrintersView>("select * from dbo.PrintersView order by id").ToList();
+            }
+            ViewBag.Title = "Справочник техники организации";
+            //ViewBag.Message = "";
+
+            return View(printers);
+        }
+
+        // Cartridges
+        public ActionResult Cartridges()
+        {
+            var cartridges = new List<CartridgesView>();
+
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                cartridges = db.Query<CartridgesView>("select * from dbo.CartridgesView order by id").ToList();
+            }
+            ViewBag.Title = "Справочник подходящих расходников";
+            //ViewBag.Message = "";
+
+            return View(cartridges);
         }
 
         // Cabinets

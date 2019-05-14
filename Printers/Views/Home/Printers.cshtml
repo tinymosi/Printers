@@ -1,0 +1,87 @@
+﻿@model IEnumerable<PrintersView>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>@ViewBag.Message</h4>
+
+<br />
+
+<p>
+    <a class="btn btn-primary btn-lg btn-block" @Html.ActionLink("Добавить устройство", "Create")</a>
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PrinterBrand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrinterModel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InventoryNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Building)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrinterBrand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrinterModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InventoryNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Building)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td class="text-right">
+                <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "PerformersEdit", new { id = item.ID })
+                    <!-- <a class="btn btn-warning btn-sm" @Html.ActionLink("Подробнее", "PerformersDetails", new { id = item.ID }) -->
+                    <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "PerformersDelete", new { id = item.ID })
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>

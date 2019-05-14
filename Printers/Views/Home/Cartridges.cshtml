@@ -1,0 +1,60 @@
+﻿@model IEnumerable<CartridgesView>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>@ViewBag.Message</h4>
+
+<br />
+
+<p>
+    <a class="btn btn-primary btn-lg btn-block" @Html.ActionLink("Добавить картридж", "Create")</a>
+</p>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PrinterBrand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrinterModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartdgeModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartridgeColor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrinterBrand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrinterModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartdgeModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartridgeColor)
+            </td>
+            <td class="text-right">
+                <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "PerformersEdit", new { id = item.ID })
+                <!-- <a class="btn btn-warning btn-sm" @Html.ActionLink("Подробнее", "PerformersDetails", new { id = item.ID }) -->
+                <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "PerformersDelete", new { id = item.ID })
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>

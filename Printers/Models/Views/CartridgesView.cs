@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 public class CartridgesView
 {
+    public int ID { get; set; }
+
     [Display(Name = "Бренд")]
     public string PrinterBrand { get; set; }
 
