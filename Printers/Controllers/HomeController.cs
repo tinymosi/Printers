@@ -59,10 +59,112 @@ namespace Printers.Controllers
             {
                 performers = db.Query<Performers>("select * from dbo.Performers order by id").ToList();
             }
-            ViewBag.Title = "Сотрудниик";
+            ViewBag.Title = "Сотрудники";
             ViewBag.Message = "Список ответственных сотрудников организации.";
 
             return View(performers);
+        }
+
+        [HttpGet]
+        public ActionResult PerformersCreate()
+        {
+            var performercreate = new Performers();
+
+            ViewBag.Title = "Сотрудники";
+            ViewBag.Message = "Добавление нового сотрудника";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PerformersCreate(string Name)
+        {
+            var performercreate = new Performers();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                performercreate = db.Query<Performers>($"insert into dbo.Performers ([Name]) values ('{Name}')").FirstOrDefault();
+            }
+            return RedirectToAction("Performers");
+        }
+
+        [HttpGet]
+        public ActionResult PerformersEdit(int id)
+        {
+            var performeredit = new Performers();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                performeredit = db.Query<Performers>($"select * from dbo.Performers where id = {id}").FirstOrDefault();
+            }
+            ViewBag.Title = "Сотрудники";
+            ViewBag.Message = "Редактирование данных сотрудника";
+            return View(performeredit);
+        }
+
+        [HttpPost]
+        public ActionResult PerformersEdit(string Name, int id)
+        {
+            var performeredit = new Performers();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                performeredit = db.Query<Performers>($"update dbo.Performers set [Name] = '{Name}' where ID = {id}").FirstOrDefault();
+            }
+            return RedirectToAction("Performers");
+        }
+
+        public ActionResult PerformersDetails(int id)
+        {
+            var performerdetails = new Performers();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                performerdetails = db.Query<Performers>($"select * from dbo.Performers where id = {id}").FirstOrDefault();
+            }
+            return View(performerdetails);
+        }
+
+        [HttpGet]
+        public ActionResult PerformersDelete(int id, string Name)
+        {
+            var performerdelete = new Performers();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                performerdelete = db.Query<Performers>($"select * from dbo.Performers where id = {id}").FirstOrDefault();
+            }
+            ViewBag.Title = "Сотрудники";
+            ViewBag.Message = "Удалить сотрудника?";
+            return View(performerdelete);
+        }
+
+        [HttpPost]
+        public ActionResult PerformersDelete(int id)
+        {
+            var performerdelete = new Performers();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                performerdelete = db.Query<Performers>($"delete from dbo.Performers where id = {id}").FirstOrDefault();
+            }
+            return RedirectToAction("Performers");
+        }
+
+
+
+        //Получение списка сотрудников
+        public List<SelectListItem> GetPerformers()
+        {
+            var user = new List<SelectListItem>();
+            List<Performers> model = new List<Performers>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Performers>($"Select * from dbo.Performers order by Name").ToList();
+            }
+            foreach (var item in model)
+            {
+                user.Add(new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.ID.ToString()
+                });
+            }
+            return user;
         }
     }
 }
