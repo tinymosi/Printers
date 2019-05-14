@@ -4,16 +4,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
-<h4>@ViewBag.Message</h4>
+<div class="jumbotron" style="padding-bottom: 10px;">
+    <h1>Городские Электрические сети</h1>
+    <h2>Движение техники</h2>
+    <h4>История джижения техники. Где сейчас находится устройство, кто и когда его туда перенес.</h4>
 
-<br />
+    <br />
 
-<p>
-    <a class="btn btn-primary btn-lg btn-block" @Html.ActionLink("Добавить запись", "Create")</a>
-</p>
+    <p>
+        <a class="btn btn-primary btn-lg btn-block" @Html.ActionLink("Добавить запись", "Create")</a>
+    </p>
+</div>
 
-<table class="table">
+<table class="table  table-condensed">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PrinterBrand)
@@ -21,18 +24,18 @@
         <th>
             @Html.DisplayNameFor(model => model.PrinterModel)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuildingOld)
+        <th class="text-right">
+            Старое здание,
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CabinetOld)
+            кабинет
         </th>
-        <td></td>
-        <th>
-            @Html.DisplayNameFor(model => model.BuildingNew)
+        <th> </th>
+        <th class="text-right">
+            Новое здание,
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CabinetNew)
+            кабиент
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -55,14 +58,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PrinterModel)
             </td>
-            <td>
+            <td class="text-right">
                 @Html.DisplayFor(modelItem => item.BuildingOld)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CabinetOld)
             </td>
-            <td>→</td>
-            <td>
+            <td class="text-center"><strong>→</strong></td>
+            <td class="text-right">
                 @Html.DisplayFor(modelItem => item.BuildingNew)
             </td>
             <td>
@@ -77,10 +80,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IP)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            <td class="text-right">
+                <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "PerformersEdit", new { id = item.ID })
+                    <!--<a class="btn btn-warning btn-sm" @Html.ActionLink("Подробнее", "PerformersDetails", new { id = item.ID })-->
+                    <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "PerformersDelete", new { id = item.ID })
+                </div>
             </td>
         </tr>
     }

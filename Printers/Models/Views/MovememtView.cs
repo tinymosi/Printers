@@ -29,7 +29,7 @@ public class MovementView
     [Display(Name = "Ответственный")]
     public string Name { get; set; }
 
-    [Display(Name = "Дата перемещения")]
+    [Display(Name = "Дата")]
     [DataType(DataType.Date)]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.mm.yyyy}")]
     public DateTime MoveDate { get; set; }
