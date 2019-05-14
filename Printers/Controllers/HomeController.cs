@@ -16,6 +16,11 @@ namespace Printers.Controllers
     {
         string constr = ConfigurationManager.ConnectionStrings["DC"].ConnectionString;
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult Movement()
         {
             var movement = new List<MovementView>();
@@ -30,23 +35,21 @@ namespace Printers.Controllers
             return View(movement);
         }
 
-        public ActionResult Index()
+        // Cabinets
+        public ActionResult Cabinets()
         {
-            return View();
+            var cabinets = new List<CabinetsView>();
+
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                cabinets = db.Query<CabinetsView>("SELECT * FROM dbo.CabinetsView ORDER BY ID").ToList();
+            }
+            ViewBag.Title = "Кабинеты";
+            ViewBag.Message = "Справочник кабинетов организации.";
+
+            return View(cabinets);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }

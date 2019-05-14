@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 public class CabinetsView
 {
+    public int ID { get; set; }
+
     [Display(Name = "Здание")]
     public string Building { get; set; }
 
