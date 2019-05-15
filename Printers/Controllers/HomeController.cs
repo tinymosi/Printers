@@ -194,107 +194,6 @@ namespace Printers.Controllers
         }
 
 
-
-        //Получение списка сотрудников
-        public List<SelectListItem> GetPerformers()
-        {
-            var user = new List<SelectListItem>();
-            List<Performers> model = new List<Performers>();
-            using (IDbConnection db = new SqlConnection(constr))
-            {
-                model = db.Query<Performers>($"Select * from dbo.Performers order by Name").ToList();
-            }
-            foreach (var item in model)
-            {
-                user.Add(new SelectListItem
-                {
-                    Text = item.Name,
-                    Value = item.ID.ToString()
-                });
-            }
-            return user;
-        }
-
-        //Получение списка брендов принтеров
-        public List<SelectListItem> GetPrintersBrands()
-        {
-            var printerbrand = new List<SelectListItem>();
-            List<PrintBrands> model = new List<PrintBrands>();
-            using (IDbConnection db = new SqlConnection(constr))
-            {
-                model = db.Query<PrintBrands>($"Select * from dbo.PrintBrands").ToList();
-            }
-            foreach (var item in model)
-            {
-                printerbrand.Add(new SelectListItem
-                {
-                    Text = item.PrinterBrand,
-                    Value = item.ID.ToString()
-                });
-            }
-            return printerbrand;
-        }
-
-        //Получени списка моделей принтеров
-        public List<SelectListItem> GetPrintersModels()
-        {
-            var printermodel = new List<SelectListItem>();
-            List<PrintModels> model = new List<PrintModels>();
-            using (IDbConnection db = new SqlConnection(constr))
-            {
-                model = db.Query<PrintModels>($"Select * from dbo.PrintModels").ToList();
-            }
-            foreach (var item in model)
-            {
-                printermodel.Add(new SelectListItem
-                {
-                    Text = item.PrinterModel,
-                    Value = item.ID.ToString()
-                });
-            }
-            return printermodel;
-        }
-
-        //Получение списка кабинетов
-        public List<SelectListItem> GetCabinets()
-        {
-            var cabinet = new List<SelectListItem>();
-            List<Cabinets> model = new List<Cabinets>();
-            using (IDbConnection db = new SqlConnection(constr))
-            {
-                model = db.Query<Cabinets>($"Select * from dbo.Cabinets order by Name").ToList();
-            }
-            foreach (var item in model)
-            {
-                cabinet.Add(new SelectListItem
-                {
-                    Text = item.Name,
-                    Value = item.ID.ToString()
-                });
-            }
-            return cabinet;
-        }
-
-        //Получение списка картриджей
-        public List<SelectListItem> GetCartridges()
-        {
-            var cartidge = new List<SelectListItem>();
-            List<Cartridges> model = new List<Cartridges>();
-            using (IDbConnection db = new SqlConnection(constr))
-            {
-                model = db.Query<Cartridges>($"Select * from dbo.Cartridges order by id").ToList();
-            }
-            foreach (var item in model)
-            {
-                cartidge.Add(new SelectListItem
-                {
-                    Text = item.CartridgeModel,
-                    Value = item.ID.ToString()
-                });
-            }
-            return cartidge;
-        }
-
         // Получение списка зданий
         public List<SelectListItem> GetBuildingss()
         {
@@ -314,5 +213,129 @@ namespace Printers.Controllers
             }
             return building;
         }
+
+        // Получение списка кабинетов
+        public List<SelectListItem> GetCabinets()
+        {
+            var cabinet = new List<SelectListItem>();
+            List<Cabinets> model = new List<Cabinets>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Cabinets>($"Select * from dbo.Cabinets order by Name").ToList();
+            }
+            foreach (var item in model)
+            {
+                cabinet.Add(new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.ID.ToString()
+                });
+            }
+            return cabinet;
+        }
+
+        // Получение списка картриджей
+        public List<SelectListItem> GetCartridges()
+        {
+            var cartidge = new List<SelectListItem>();
+            List<Cartridges> model = new List<Cartridges>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Cartridges>($"Select * from dbo.Cartridges order by id").ToList();
+            }
+            foreach (var item in model)
+            {
+                cartidge.Add(new SelectListItem
+                {
+                    Text = item.CartridgeModel,
+                    Value = item.ID.ToString()
+                });
+            }
+            return cartidge;
+        }
+
+        // Получение списка сотрудников
+        public List<SelectListItem> GetPerformers()
+        {
+            var user = new List<SelectListItem>();
+            List<Performers> model = new List<Performers>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Performers>($"Select * from dbo.Performers order by Name").ToList();
+            }
+            foreach (var item in model)
+            {
+                user.Add(new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.ID.ToString()
+                });
+            }
+            return user;
+        }
+
+        // Получение списка брендов принтеров
+        public List<SelectListItem> GetPrintersBrands()
+        {
+            var printerbrand = new List<SelectListItem>();
+            List<PrintBrands> model = new List<PrintBrands>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<PrintBrands>($"Select * from dbo.PrintBrands").ToList();
+            }
+            foreach (var item in model)
+            {
+                printerbrand.Add(new SelectListItem
+                {
+                    Text = item.PrinterBrand,
+                    Value = item.ID.ToString()
+                });
+            }
+            return printerbrand;
+        }
+
+        // Получени списка моделей принтеров
+        public List<SelectListItem> GetPrintersModels()
+        {
+            var printermodel = new List<SelectListItem>();
+            List<PrintModels> model = new List<PrintModels>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<PrintModels>($"Select * from dbo.PrintModels").ToList();
+            }
+            foreach (var item in model)
+            {
+                printermodel.Add(new SelectListItem
+                {
+                    Text = item.PrinterModel,
+                    Value = item.ID.ToString()
+                });
+            }
+            return printermodel;
+        }
+
+        // Получени списка статусов
+        public List<SelectListItem> GetStatus()
+        {
+            var status = new List<SelectListItem>();
+            List<Status> model = new List<Status>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Status>($"Select * from dbo.Status order by id").ToList();
+            }
+            foreach (var item in model)
+            {
+                status.Add(new SelectListItem
+                {
+                    Text = item.StatusMsg,
+                    Value = item.ID.ToString()
+                });
+            }
+            return status;
+        }
+
+
+
+
     }
 }
