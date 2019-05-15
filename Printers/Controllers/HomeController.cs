@@ -294,5 +294,25 @@ namespace Printers.Controllers
             }
             return cartidge;
         }
+
+        // Получение списка зданий
+        public List<SelectListItem> GetBuildingss()
+        {
+            var building = new List<SelectListItem>();
+            List<Buildings> model = new List<Buildings>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Buildings>($"Select * from dbo.Buildings order by id").ToList();
+            }
+            foreach (var item in model)
+            {
+                building.Add(new SelectListItem
+                {
+                    Text = item.Building,
+                    Value = item.ID.ToString()
+                });
+            }
+            return building;
+        }
     }
 }
