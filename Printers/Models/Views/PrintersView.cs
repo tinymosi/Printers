@@ -31,7 +31,7 @@ public class PrintersView
 
     [Display(Name = "Дата покупки")]
     [DataType(DataType.Date)]
-    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.mm.yyyy}")]
+    [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
     public DateTime PurchaseDate { get; set; }
 
     [Display(Name = "Цена")]
