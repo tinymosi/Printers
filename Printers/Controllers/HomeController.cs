@@ -36,6 +36,23 @@ namespace Printers.Controllers
             return View(movement);
         }
 
+        // Printers select
+        public ActionResult PrintersSelect()
+        {
+            var printers = new List<PrintersView>();
+
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                printers = db.Query<PrintersView>("select * from dbo.PrintersView order by id desc").ToList();
+            }
+            ViewBag.Title = "Справочник техники организации";
+            ViewBag.Message = "Выберите устройство";
+
+            return View(printers);
+        }
+
+
+
         // Printers
         public ActionResult Printers()
         {
@@ -43,7 +60,7 @@ namespace Printers.Controllers
 
             using (IDbConnection db = new SqlConnection(constr))
             {
-                printers = db.Query<PrintersView>("select * from dbo.PrintersView order by id").ToList();
+                printers = db.Query<PrintersView>("select * from dbo.PrintersView order by id desc").ToList();
             }
             ViewBag.Title = "Справочник техники организации";
             //ViewBag.Message = "";

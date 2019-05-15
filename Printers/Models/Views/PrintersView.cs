@@ -24,7 +24,7 @@ public class PrintersView
     public string Number { get; set; }
 
     [Display(Name = "Статус")]
-    public string Status { get; set; }
+    public string StatusMsg { get; set; }
 
     [Display(Name = "IP-адрес")]
     public string IP { get; set; }
