@@ -8,7 +8,7 @@ using Dapper;
 using System.Data;
 using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
-
+using Printers.Models.ListModels;
 
 namespace Printers.Controllers
 {
@@ -68,6 +68,45 @@ namespace Printers.Controllers
             return View(printers);
         }
 
+        //// Printers Create
+        //public ActionResult PrintersCreate()
+        //{
+        //    var model = new PrintersList();
+        //    {
+        //        Printer = new Printer() { PurchaseDate = DateTime.Now},
+        //        GetPrintersBrands = GetPrintersBrands(),
+        //        GetPrintersModels = GetPrintersModels()
+        //    }
+
+        //    return View(model);
+        //}
+        
+        //POST: Printers Create
+        [HttpPost]
+        public ActionResult PrintersCreate(PrintersList model)
+        {
+            try
+            {
+                AddPrinter(model.Printer);
+                return RedirectToAction("Printers");
+            }
+            catch
+            {
+                return View(model);
+            }
+
+        }
+
+        //SEND: Printers Create
+        public void AddPrinter(Printer model)
+        {
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Printer>($"insert into dbo.Printer (PrinterBrandID, PrinterModelID, InventoryNumber, StatusID, IP, Price) values ({model.PrinterBrandID}, {model.PrinterModelID}, {model.InventoryNumber}, {model.StatusID}, {model.IP}, {model.Price})").FirstOrDefault();
+            }
+            return;
+        }
+
         // Cartridges
         public ActionResult Cartridges()
         {
@@ -98,6 +137,69 @@ namespace Printers.Controllers
             return View(cabinets);
         }
 
+        [HttpGet]
+        public ActionResult BuildingCreate()
+        {
+            var buildingcreate = new Buildings();
+
+            ViewBag.Title = "Кабинеты";
+            ViewBag.Message = "Добавление нового здания";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BuildingCreate(string Building)
+        {
+            var buildingcreate = new Performers();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                buildingcreate = db.Query<Performers>($"insert into dbo.Buildings ([Building]) values ('{Building}')").FirstOrDefault();
+            }
+            return RedirectToAction("Cabinets");
+        }
+
+        //GET: CabinetCreate
+        [HttpGet]
+        public ActionResult CabinetCreate()
+        {
+            var model = new CabinetsList()
+            {
+                Cabinets = new Cabinets(),
+                GetBuildings = GetBuildings(),
+                //Number
+            };
+            ViewBag.Title = "Кабинеты";
+            ViewBag.Message = "Добавление нового кабинета";
+
+            return View();
+        }
+
+        //POST: CabinetCreate
+        [HttpPost]
+        public ActionResult CabinetCreate(CabinetsList model)
+        {
+            try
+            {
+                AddCabinet(model.Cabinets);
+                return RedirectToAction("Cabinets");
+            }
+            catch
+            {
+                return View(model);
+            }
+
+        }
+
+        //SEND: CabinetCreate
+        public void AddCabinet(Cabinets model)
+        {
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Cabinets>($"insert into dbo.Cabinets (BuildingID, Number) values ({model.BuildingID}, {model.Number})").FirstOrDefault();
+            }
+            return;
+        }
 
         // Performers
         public ActionResult Performers()
@@ -193,9 +295,10 @@ namespace Printers.Controllers
             return RedirectToAction("Performers");
         }
 
+        #region Getting lists
 
         // Получение списка зданий
-        public List<SelectListItem> GetBuildingss()
+        public List<SelectListItem> GetBuildings()
         {
             var building = new List<SelectListItem>();
             List<Buildings> model = new List<Buildings>();
@@ -227,7 +330,7 @@ namespace Printers.Controllers
             {
                 cabinet.Add(new SelectListItem
                 {
-                    Text = item.Name,
+                    Text = item.Number,
                     Value = item.ID.ToString()
                 });
             }
@@ -333,7 +436,7 @@ namespace Printers.Controllers
             }
             return status;
         }
-
+        #endregion
 
 
 

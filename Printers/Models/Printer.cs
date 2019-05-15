@@ -15,6 +15,9 @@ public class Printer
     [Display(Name = "Инв. номер")]
     public string InventoryNumber { get; set; }
 
+    [Display(Name = "Статус")]
+    public int StatusID { get; set; }
+
     [Display(Name = "IP-адрес")]
     public string IP { get; set; }
 

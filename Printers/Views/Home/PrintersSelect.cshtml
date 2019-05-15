@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<PrintersView>
 
-
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,15 +8,16 @@
 <h4>@ViewBag.Message</h4>
 
 <br />
-   
-<div class="form-group">
-    <label>Поиск</label>
-    <input class="form-control form-control-lg" type="text" placeholder="🔍 Поиск">
-    <!--<small id="emailHelp" class="form-text text-muted">Вы можете искать по названию бренда, модели или инвентарному номеру.</small>-->
-</div>
 
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">🔍</span>
+    <input class="form-control" type="text" id="search" placeholder="Поиск">
+</div>
+<small id="emailHelp" class="form-text text-muted">Вы можете искать по любому столбцу таблицы.</small>
 <br />
-<table class="table table-hover">
+<br />
+
+<table class="table table-hover" id="mytable">
     <thead>
         <tr>
             <th>
@@ -51,40 +51,59 @@
         </tr>
     </thead>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrinterBrand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrinterModel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InventoryNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Building)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Number)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusMsg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PurchaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a class="btn btn-default btn-sm" @Html.ActionLink("Выбрать", "#", new { id = item.ID })
-            </td>
-        </tr>
-    }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrinterBrand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrinterModel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Building)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusMsg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PurchaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a class="btn btn-default btn-sm" @Html.ActionLink("Выбрать", "#", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
+
+<script>
+    $(document).ready(function () {
+        $("#search").keyup(function () {
+            _this = this;
+            $.each($("#mytable tbody tr"), function () {
+                if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

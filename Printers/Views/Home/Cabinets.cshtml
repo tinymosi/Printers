@@ -10,19 +10,23 @@
 <br />
 
 <p>
-    <a class="btn btn-primary btn-lg btn-block" @Html.ActionLink("Добавить кабинет", "Create")</a>
+    <a class="btn btn-primary btn-lg" style="margin-right: 15px" @Html.ActionLink("Добавить здание", "BuildingCreate")</a>
+    <a class="btn btn-primary btn-lg" @Html.ActionLink("Добавить кабинет", "CabinetCreate")</a>
 </p>
+<hr />
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Building)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Number)
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Building)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
@@ -33,10 +37,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Number)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            <td class="text-right">
+                <div class="btn-group" role="group" aria-label="...">
+                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "PerformersEdit", new { id = item.ID })
+                    <!-- <a class="btn btn-warning btn-sm" @Html.ActionLink("Подробнее", "PerformersDetails", new { id = item.ID }) -->
+                    <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "PerformersDelete", new { id = item.ID })
+                </div>
             </td>
         </tr>
     }

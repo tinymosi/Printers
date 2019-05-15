@@ -130,6 +130,8 @@
     <Compile Include="Models\Buildings.cs" />
     <Compile Include="Models\Cabinets.cs" />
     <Compile Include="Models\Cartridges.cs" />
+    <Compile Include="Models\ListModels\CabinetsList.cs" />
+    <Compile Include="Models\ListModels\PrintersList.cs" />
     <Compile Include="Models\Movement.cs" />
     <Compile Include="Models\Performers.cs" />
     <Compile Include="Models\PrintBrands.cs" />
@@ -185,6 +187,7 @@
     <Content Include="Views\Home\Printers.cshtml" />
     <Content Include="Views\Home\Cartridges.cshtml" />
     <Content Include="Views\Home\PrintersSelect.cshtml" />
+    <Content Include="Views\Home\BuildingCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
