@@ -337,6 +337,46 @@ namespace Printers.Controllers
             return cabinet;
         }
 
+        // Получение списка зданий как текст
+        public List<SelectListItem> GetBuildingsAsText()
+        {
+            var building = new List<SelectListItem>();
+            List<Buildings> model = new List<Buildings>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Buildings>($"Select * from dbo.Buildings order by id").ToList();
+            }
+            foreach (var item in model)
+            {
+                building.Add(new SelectListItem
+                {
+                    Text = item.Building,
+                    Value = item.Building.ToString()
+                });
+            }
+            return building;
+        }
+
+        // Получение списка кабинетов как текст
+        public List<SelectListItem> GetCabinetsAsText()
+        {
+            var cabinet = new List<SelectListItem>();
+            List<Cabinets> model = new List<Cabinets>();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                model = db.Query<Cabinets>($"Select * from dbo.Cabinets order by Name").ToList();
+            }
+            foreach (var item in model)
+            {
+                cabinet.Add(new SelectListItem
+                {
+                    Text = item.Number,
+                    Value = item.Number.ToString()
+                });
+            }
+            return cabinet;
+        }
+
         // Получение списка картриджей
         public List<SelectListItem> GetCartridges()
         {
