@@ -68,19 +68,22 @@ namespace Printers.Controllers
             return View(printers);
         }
 
-        //// Printers Create
-        //public ActionResult PrintersCreate()
-        //{
-        //    var model = new PrintersList();
-        //    {
-        //        Printer = new Printer() { PurchaseDate = DateTime.Now},
-        //        GetPrintersBrands = GetPrintersBrands(),
-        //        GetPrintersModels = GetPrintersModels()
-        //    }
+        // Printers Create
+        public ActionResult PrintersCreate()
+        {
+            var model = new PrintersList();
+            {
+                Printer = new Printer(), { PurchaseDate = DateTime.Now },
+                GetPrintersBrands = GetPrintersBrands(),
+                GetPrintersModels = GetPrintersModels(),
+                InventoryNumber,
+                GetStatus = GetStatus(),
+                IP,
+                Price
+            }
+            return View(model);
+        }
 
-        //    return View(model);
-        //}
-        
         //POST: Printers Create
         [HttpPost]
         public ActionResult PrintersCreate(PrintersList model)
@@ -102,7 +105,7 @@ namespace Printers.Controllers
         {
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<Printer>($"insert into dbo.Printer (PrinterBrandID, PrinterModelID, InventoryNumber, StatusID, IP, Price) values ({model.PrinterBrandID}, {model.PrinterModelID}, {model.InventoryNumber}, {model.StatusID}, {model.IP}, {model.Price})").FirstOrDefault();
+                model = db.Query<Printer>($"insert into dbo.Printer (PrinterBrandID, PrinterModelID, InventoryNumber, StatusID, IP, PurchaseDate, Price) values ({model.PrinterBrandID}, {model.PrinterModelID}, {model.InventoryNumber}, {model.StatusID}, {model.IP}, {model.PurchaseDate}, {model.Price})").FirstOrDefault();
             }
             return;
         }
