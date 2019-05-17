@@ -18,14 +18,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Движение", "Movement", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Движение", "Index", "Movement", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Принтера", "Printers", "Home")</li>
-                    <li>@Html.ActionLink("Картриджи", "Cartridges", "Home")</li>
-                    <li>@Html.ActionLink("Кабинеты", "Cabinets", "Home")</li>
-                    <li>@Html.ActionLink("Сотрудники", "Performers", "Home")</li>
+                    <li>@Html.ActionLink("Принтера", "Index", "Printers")</li>
+                    <li>@Html.ActionLink("Картриджи", "Index", "Cartridges")</li>
+                    <li>@Html.ActionLink("Кабинеты", "Index", "Cabinets")</li>
+                    <li>@Html.ActionLink("Сотрудники", "Index", "Performers")</li>
                 </ul>
             </div>
         </div>

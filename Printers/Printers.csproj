@@ -123,7 +123,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\BuildingsController.cs" />
+    <Compile Include="Controllers\CabinetsController.cs" />
+    <Compile Include="Controllers\CartridgesController.cs" />
+    <Compile Include="Controllers\MovementController.cs" />
+    <Compile Include="Controllers\PerformersController.cs" />
+    <Compile Include="Controllers\PrintersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -131,6 +136,7 @@
     <Compile Include="Models\Cabinets.cs" />
     <Compile Include="Models\Cartridges.cs" />
     <Compile Include="Models\ListModels\CabinetsList.cs" />
+    <Compile Include="Models\ListModels\MovementList.cs" />
     <Compile Include="Models\ListModels\PrintersList.cs" />
     <Compile Include="Models\Movement.cs" />
     <Compile Include="Models\Performers.cs" />
@@ -143,6 +149,7 @@
     <Compile Include="Models\Views\MovememtView.cs" />
     <Compile Include="Models\Views\PrintersView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ListsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -156,6 +163,11 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\inputmask\inputmask.date.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask.js" />
+    <Content Include="Scripts\inputmask\inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\inputmask\jquery.inputmask.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -166,6 +178,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Site\PrintersCreate.js" />
+    <Content Include="Scripts\Site\Search.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -177,20 +191,22 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Movement.cshtml" />
-    <Content Include="Views\Home\Cabinets.cshtml" />
-    <Content Include="Views\Home\Performers.cshtml" />
-    <Content Include="Views\Home\PerformersCreate.cshtml" />
-    <Content Include="Views\Home\PerformersEdit.cshtml" />
-    <Content Include="Views\Home\PerformersDelete.cshtml" />
-    <Content Include="Views\Home\Printers.cshtml" />
-    <Content Include="Views\Home\Cartridges.cshtml" />
-    <Content Include="Views\Home\PrintersSelect.cshtml" />
-    <Content Include="Views\Home\BuildingCreate.cshtml" />
+    <Content Include="Views\Movement\Index.cshtml" />
+    <Content Include="Views\Cabinets\Index.cshtml" />
+    <Content Include="Views\Performers\Index.cshtml" />
+    <Content Include="Views\Performers\Create.cshtml" />
+    <Content Include="Views\Performers\Edit.cshtml" />
+    <Content Include="Views\Performers\Delete.cshtml" />
+    <Content Include="Views\Printers\Index.cshtml" />
+    <Content Include="Views\Cartridges\Index.cshtml" />
+    <Content Include="Views\Movement\SelectPrinter.cshtml" />
+    <Content Include="Views\Buildings\Create.cshtml" />
+    <Content Include="Views\Printers\Create.cshtml" />
+    <Content Include="Views\Movement\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

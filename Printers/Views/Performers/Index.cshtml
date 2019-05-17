@@ -10,7 +10,7 @@
 <br />
 
 <p>
-    <a class="btn btn-primary btn-lg btn-block" @Html.ActionLink("Добавить сотрудника", "PerformersCreate")</a>
+    <a class="btn btn-primary btn-lg btn-block" @Html.ActionLink("Добавить сотрудника", "Create")</a>
 </p>
 <hr />
 
@@ -32,9 +32,8 @@
             </td>
             <td class="text-right">
                 <div class="btn-group" role="group" aria-label="...">
-                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "PerformersEdit", new { id = item.ID })
-                    <!-- <a class="btn btn-warning btn-sm" @Html.ActionLink("Подробнее", "PerformersDetails", new { id = item.ID }) -->
-                    <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "PerformersDelete", new { id = item.ID })
+                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "Edit", new { id = item.ID })
+                    <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
                 </div>
             </td>
         </tr>

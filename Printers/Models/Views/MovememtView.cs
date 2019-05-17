@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
 
 public class MovementView
@@ -31,7 +28,7 @@ public class MovementView
 
     [Display(Name = "Дата")]
     [DataType(DataType.Date)]
-    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.mm.yyyy}")]
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
     public DateTime MoveDate { get; set; }
 
     [Display(Name = "IP-адрес")]

@@ -23,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.PrinterModel)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CartdgeModel)
+                @Html.DisplayNameFor(model => model.CartridgeModel)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CartridgeColor)
@@ -42,16 +42,15 @@
                 @Html.DisplayFor(modelItem => item.PrinterModel)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CartdgeModel)
+                @Html.DisplayFor(modelItem => item.CartridgeModel)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CartridgeColor)
             </td>
             <td class="text-right">
                 <div class="btn-group" role="group" aria-label="...">
-                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "PerformersEdit", new { id = item.ID })
-                <!-- <a class="btn btn-warning btn-sm" @Html.ActionLink("Подробнее", "PerformersDetails", new { id = item.ID }) -->
-                <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "PerformersDelete", new { id = item.ID })
+                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "Edit", new { id = item.ID })
+                <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
                 </div>
             </td>
         </tr>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 public class CartridgesView
 {
@@ -14,8 +10,8 @@ public class CartridgesView
     [Display(Name = "Модель")]
     public string PrinterModel { get; set; }
 
-    [Display(Name = "Картрижд")]
-    public string CartdgeModel { get; set; }
+    [Display(Name = "Картридж")]
+    public string CartridgeModel { get; set; }
 
     [Display(Name = "Цвет")]
     public string CartridgeColor { get; set; }

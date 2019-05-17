@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
 
 public class Printer
@@ -15,15 +12,13 @@ public class Printer
     [Display(Name = "Инв. номер")]
     public string InventoryNumber { get; set; }
 
-    [Display(Name = "Статус")]
-    public int StatusID { get; set; }
+    //public int BuildingNowID { get; set; }
 
-    [Display(Name = "IP-адрес")]
-    public string IP { get; set; }
+    //public int CabinetNowID { get; set; }
 
     [Display(Name = "Дата покупки")]
     [DataType(DataType.Date)]
-    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.mm.yyyy}")]
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
     public DateTime PurchaseDate { get; set; }
 
     [Display(Name = "Цена")]
