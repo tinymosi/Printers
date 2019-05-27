@@ -5,7 +5,7 @@ public class Printer
 {
     public int ID { get; set; }
 
-    public int PrinterBrandID { get; set; }
+    //public int PrinterBrandID { get; set; }
 
     public int PrinterModelID { get; set; }
 
@@ -24,4 +24,5 @@ public class Printer
     [Display(Name = "Цена")]
     public decimal Price { get; set; }
 
+    public bool IsDeleted { get; set; }
 }

@@ -9,4 +9,7 @@ public class Cabinets
     [Required(ErrorMessage = "Введите кабинет")]
     [Display(Name = "Номер кабинета")]
     public string Number { get; set; }
+
+    public bool IsDeleted { get; set; }
+
 }

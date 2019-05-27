@@ -7,4 +7,5 @@ public class Performers
     [Display(Name = "Сотрудник")]
     public string Name { get; set; }
 
+    public bool IsDeleted { get; set; }
 }

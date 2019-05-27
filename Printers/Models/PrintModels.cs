@@ -8,4 +8,6 @@ public class PrintModels
 
     [Display(Name = "Модель")]
     public string PrinterModel { get; set; }
+
+    public bool IsDeleted { get; set; }
 }

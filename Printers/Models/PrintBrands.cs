@@ -6,4 +6,6 @@ public class PrintBrands
 
     [Display(Name = "Бренд")]
     public string PrinterBrand { get; set; }
+
+    public bool IsDeleted { get; set; }
 }

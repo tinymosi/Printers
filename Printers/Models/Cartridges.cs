@@ -12,4 +12,5 @@ public class Cartridges
     [Display(Name = "Цвет")]
     public string CartridgeColor { get; set; }
 
+    public bool IsDeleted { get; set; }
 }
