@@ -20,8 +20,8 @@ namespace Printers.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Title = "Кабинеты";
-            ViewBag.Message = "Справочник кабинетов организации.";
+            ViewBag.Title = "Справочник";
+            ViewBag.Message = "Справочник наименований техники.";
             return View();
         }
 
