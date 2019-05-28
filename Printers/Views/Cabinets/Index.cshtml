@@ -1,6 +1,4 @@
-﻿@model IEnumerable<CabinetsView>
-
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,41 +7,19 @@
 
 <br />
 
-<p>
-    <a class="btn btn-primary btn-lg" style="margin-right: 15px" @Html.ActionLink("Добавить здание", "Create", "Buildings")</a>
-    <a class="btn btn-primary btn-lg" @Html.ActionLink("Добавить кабинет", "Create")</a>
-</p>
-<hr />
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Building)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Number)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Building)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Number)
-            </td>
-            <td class="text-right">
-                <div class="btn-group" role="group" aria-label="...">
-                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "Edit", new { id = item.ID })
-                    <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
-                </div>
-            </td>
-        </tr>
-    }
-
-</table>
+<div class="row">
+    <div class="col-md-5">
+        <p>
+            <a class="btn btn-primary btn-lg" style="margin-right: 15px" @Html.ActionLink("Добавить здание", "Create", "Buildings")</a>
+        </p>
+        <hr />
+        @{Html.RenderAction("BuildingsList", "Buildings"); }
+    </div>
+    <div class="col-md-7">
+        <p>
+            <a class="btn btn-primary btn-lg" @Html.ActionLink("Добавить кабинет", "Create")</a>
+        </p>
+        <hr />
+        @{Html.RenderAction("CabinetsList"); }
+    </div>
+</div>

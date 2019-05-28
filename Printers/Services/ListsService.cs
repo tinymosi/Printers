@@ -19,7 +19,7 @@ namespace Printers.Services
             List<Buildings> model = new List<Buildings>();
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<Buildings>($"Select * from dbo.Buildings order by id").ToList();
+                model = db.Query<Buildings>($"Select * from dbo.Buildings where IsDeleted = 0 order by id").ToList();
             }
             foreach (var item in model)
             {
@@ -39,7 +39,7 @@ namespace Printers.Services
             List<Cabinets> model = new List<Cabinets>();
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<Cabinets>("Select * from dbo.Cabinets where @BuildingID = 0 or BuildingID = @BuildingID order by Number",
+                model = db.Query<Cabinets>("Select * from dbo.Cabinets where (@BuildingID = 0 or BuildingID = @BuildingID) AND IsDeleted = 0 order by Number",
                         new { BuildingID = id ?? 0 }).ToList();
             }
             foreach (var item in model)
@@ -60,7 +60,7 @@ namespace Printers.Services
             List<Cartridges> model = new List<Cartridges>();
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<Cartridges>($"Select * from dbo.Cartridges order by id").ToList();
+                model = db.Query<Cartridges>($"Select * from dbo.Cartridges where IsDeleted = 0 order by id").ToList();
             }
             foreach (var item in model)
             {
@@ -80,7 +80,7 @@ namespace Printers.Services
             List<Performers> model = new List<Performers>();
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<Performers>($"Select * from dbo.Performers order by Name").ToList();
+                model = db.Query<Performers>($"Select * from dbo.Performers where IsDeleted = 0 order by Name").ToList();
             }
             foreach (var item in model)
             {
@@ -100,7 +100,7 @@ namespace Printers.Services
             List<PrintBrands> model = new List<PrintBrands>();
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<PrintBrands>($"Select * from dbo.PrintBrands").ToList();
+                model = db.Query<PrintBrands>($"Select * from dbo.PrintBrands where IsDeleted = 0").ToList();
             }
             foreach (var item in model)
             {
@@ -114,7 +114,7 @@ namespace Printers.Services
         }
 
         // Получени списка моделей принтеров
-        public List<SelectListItem> GetPrintersModels(int? id)
+        public List<SelectListItem> GetPrintersModels(int? id = null)
         {
             var printermodel = new List<SelectListItem>();
             List<PrintModels> model = new List<PrintModels>();
@@ -122,7 +122,7 @@ namespace Printers.Services
             {
                 model = db
                     .Query<PrintModels>(
-                        $"Select * from dbo.PrintModels where @BrandId = 0 or PrinterBrandID = @BrandId",
+                        $"Select * from dbo.PrintModels where (@BrandId = 0 or PrinterBrandID = @BrandId) AND IsDeleted = 0 order by id",
                         new { BrandId = id ?? 0 })
                     .ToList();
             }
@@ -143,18 +143,11 @@ namespace Printers.Services
         public List<SelectListItem> GetStatus()
         {
             var status = new List<SelectListItem>();
-            List<Status> model = new List<Status>();
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<Status>($"Select * from dbo.Status order by id").ToList();
-            }
-            foreach (var item in model)
-            {
-                status.Add(new SelectListItem
-                {
-                    Text = item.StatusMsg,
-                    Value = item.ID.ToString()
-                });
+                status = db.Query<Status>($"Select * from dbo.Status where IsDeleted = 0 order by id")
+                    .Select(s => new SelectListItem { Text = s.StatusMsg, Value = s.ID.ToString() })
+                    .ToList();
             }
             return status;
         }

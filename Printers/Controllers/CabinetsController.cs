@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -7,6 +8,8 @@ using System.Web.Mvc;
 using Dapper;
 using Printers.Models.ListModels;
 using Printers.Services;
+using Printers.ViewModels;
+using Printers.ViewModels.Cabinets;
 
 namespace Printers.Controllers
 {
@@ -19,58 +22,115 @@ namespace Printers.Controllers
         // Cabinets
         public ActionResult Index()
         {
-            var cabinets = new List<CabinetsView>();
+            ViewBag.Title = "Кабинеты";
+            ViewBag.Message = "Справочник кабинетов организации.";
+            return View();
+        }
+
+        public ActionResult CabinetsList()
+        {
+            var cabinets = new List<ListItemViewModel>();
 
             using (IDbConnection db = new SqlConnection(constr))
             {
-                cabinets = db.Query<CabinetsView>("SELECT * FROM dbo.CabinetsView ORDER BY ID").ToList();
+                cabinets = db.Query<ListItemViewModel>("SELECT Cabinets.ID, Buildings.Building, Cabinets.Number " +
+                    "FROM Buildings INNER JOIN Cabinets ON Buildings.ID = Cabinets.BuildingID " +
+                    "WHERE Cabinets.IsDeleted = 0 " +
+                    "ORDER BY ID").ToList();
             }
-            ViewBag.Title = "Кабинеты";
-            ViewBag.Message = "Справочник кабинетов организации.";
 
-            return View(cabinets);
+            return PartialView("_CabinetsList", cabinets);
         }
 
         //GET: CabinetCreate
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int? ID = null)
         {
-            var model = new CabinetsList()
+            var model = new CreateViewModel();
+
+            using (IDbConnection db = new SqlConnection(constr))
             {
-                Cabinets = new Cabinets(),
-                GetBuildings = listsService.GetBuildings(),
-                //Number
+                if (ID != null)
+                {
+                    model = db.Query<CreateViewModel>($"select * FROM dbo.Cabinets WHERE ID = {ID}").FirstOrDefault();
+                }
+                model.GetBuildings = listsService.GetBuildings();
             };
+
             ViewBag.Title = "Кабинеты";
             ViewBag.Message = "Добавление нового кабинета";
 
-            return View();
+            return View(model);
         }
 
         //POST: CabinetCreate
         [HttpPost]
-        public ActionResult Create(CabinetsList model)
+        public ActionResult Create(CreateViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                AddCabinet(model.Cabinets);
-                return RedirectToAction("Index");
+                try
+                {
+                    AddCabinet(model);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "При сохранении кабинета произошла ошибка");
+                }
             }
-            catch
-            {
-                return View(model);
-            }
+            model.GetBuildings = listsService.GetBuildings();
+            return View(model);
 
         }
 
         //SEND: CabinetCreate
-        public void AddCabinet(Cabinets model)
+        public void AddCabinet(CreateViewModel model)
         {
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<Cabinets>($"insert into dbo.Cabinets (BuildingID, Number) values ({model.BuildingID}, {model.Number})").FirstOrDefault();
+                string query;
+                if (model.ID != 0)
+                {
+                    query = $"UPDATE dbo.Cabinets set BuildingID = '{model.BuildingID}', Number = '{model.Number}' where id = {model.ID}";
+                }
+                else
+                {
+                    query = $"insert into dbo.Cabinets (BuildingID, Number) values ({model.BuildingID}, '{model.Number}')";
+                }
+                db.Query(query);
             }
             return;
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var buildingDelete = new ListItemViewModel();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                buildingDelete = db.Query<ListItemViewModel>($"SELECT Cabinets.ID, Buildings.Building, Cabinets.Number " +
+                    "FROM Buildings INNER JOIN Cabinets ON Buildings.ID = Cabinets.BuildingID " +
+                    $"WHERE cabinets.ID = {id}").FirstOrDefault();
+            }
+            return View(buildingDelete);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(ListItemViewModel model)
+        {
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                db.Query($"update dbo.Cabinets set IsDeleted = 1 where id = {model.ID}");
+            }
+            return RedirectToAction("Index", "Cabinets");
+        }
+
+        [HttpPost]
+        public ActionResult GetCabinets(int? id)
+        {
+            var model = listsService.GetCabinets(id);
+            return Json(model);
         }
     }
 }

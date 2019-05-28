@@ -1,0 +1,90 @@
+﻿@model MovementView
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>MovementView</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PrinterBrand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrinterBrand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrinterModel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrinterModel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingOld)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingOld)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CabinetOld)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CabinetOld)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingNew)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingNew)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CabinetNew)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CabinetNew)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoveDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IP)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

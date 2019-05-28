@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Printers.ViewModels.Buildings.BuildingViewModel>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Building)
+        </th>
+        <th></th>
+    </tr>
+        </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Building)
+        </td>
+        <td class="text-right">
+            <div class="btn-group" role="group" aria-label="...">
+                <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "Create", "Buildings", new { id = item.ID }, null)
+                <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "Delete", "Buildings", new { id = item.ID }, null)
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

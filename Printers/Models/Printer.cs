@@ -5,16 +5,12 @@ public class Printer
 {
     public int ID { get; set; }
 
-    //public int PrinterBrandID { get; set; }
+    public int PrinterBrandID { get; set; }
 
     public int PrinterModelID { get; set; }
 
     [Display(Name = "Инв. номер")]
     public string InventoryNumber { get; set; }
-
-    //public int BuildingNowID { get; set; }
-
-    //public int CabinetNowID { get; set; }
 
     [Display(Name = "Дата покупки")]
     [DataType(DataType.Date)]

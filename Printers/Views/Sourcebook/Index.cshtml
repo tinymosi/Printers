@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<h4>@ViewBag.Message</h4>
+
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        <p>
+            <a class="btn btn-primary btn-lg" style="margin-right: 15px" @Html.ActionLink("Добавить бренд", "CreateBrand")</a>
+        </p>
+        <hr />
+        @{Html.RenderAction("Brands"); }
+    </div>
+    <div class="col-md-8">
+        <p>
+            <a class="btn btn-primary btn-lg" @Html.ActionLink("Добавить модель", "CreateModel")</a>
+        </p>
+        <hr />
+        @{Html.RenderAction("Models"); }
+    </div>
+</div>

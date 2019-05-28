@@ -151,13 +151,15 @@
     <Compile Include="Controllers\MovementController.cs" />
     <Compile Include="Controllers\PerformersController.cs" />
     <Compile Include="Controllers\PrintersController.cs" />
+    <Compile Include="Controllers\SourcebookController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Buildings.cs" />
     <Compile Include="Models\Cabinets.cs" />
     <Compile Include="Models\Cartridges.cs" />
-    <Compile Include="Models\ListModels\CabinetsList.cs" />
+    <Compile Include="ViewModels\Buildings\BuildingViewModel.cs" />
+    <Compile Include="ViewModels\Cabinets\CreateViewModel.cs" />
     <Compile Include="Models\ListModels\MovementList.cs" />
     <Compile Include="Models\ListModels\PrintersList.cs" />
     <Compile Include="Models\Movement.cs" />
@@ -166,13 +168,15 @@
     <Compile Include="Models\Printer.cs" />
     <Compile Include="Models\PrintModels.cs" />
     <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\Views\CabinetsView.cs" />
     <Compile Include="Models\Views\CartridgesView.cs" />
     <Compile Include="Models\Views\MovememtView.cs" />
     <Compile Include="Models\Views\PrintersView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ListsService.cs" />
     <Compile Include="ViewModels\Cabinets\ListItemViewModel.cs" />
+    <Compile Include="ViewModels\Cartridges\CreateViewModel.cs" />
+    <Compile Include="ViewModels\Cartridges\ListItemViewModel.cs" />
+    <Compile Include="ViewModels\Models\PrinterModelView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database.mdf" />
@@ -200,6 +204,7 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.fix.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -207,6 +212,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Site\PrintersCreate.js" />
     <Content Include="Scripts\Site\Search.js" />
+    <Content Include="Scripts\Site\SelectCabinet.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -230,6 +236,17 @@
     <Content Include="Views\Buildings\Create.cshtml" />
     <Content Include="Views\Printers\Create.cshtml" />
     <Content Include="Views\Movement\Create.cshtml" />
+    <Content Include="Views\Cabinets\Create.cshtml" />
+    <Content Include="Views\Cabinets\_CabinetsList.cshtml" />
+    <Content Include="Views\Buildings\_BuildingsList.cshtml" />
+    <Content Include="Views\Buildings\Delete.cshtml" />
+    <Content Include="Views\Cabinets\Delete.cshtml" />
+    <Content Include="Views\Movement\Delete.cshtml" />
+    <Content Include="Views\Cartridges\Create.cshtml" />
+    <Content Include="Views\Cartridges\Delete.cshtml" />
+    <Content Include="Views\Sourcebook\_Brands.cshtml" />
+    <Content Include="Views\Sourcebook\_Models.cshtml" />
+    <Content Include="Views\Sourcebook\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

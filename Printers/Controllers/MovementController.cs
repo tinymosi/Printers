@@ -24,7 +24,7 @@ namespace Printers.Controllers
 
             using (IDbConnection db = new SqlConnection(constr))
             {
-                movement = db.Query<MovementView>("select * from dbo.MovementView order by id desc").ToList();
+                movement = db.Query<MovementView>("select * from dbo.MovementView order by MoveDate desc").ToList();
             }
             ViewBag.Title = "Движение техники";
             ViewBag.Message = "История джижения техники. Где сейчас находится принтер, кто и когда его туда перенес.";
@@ -39,7 +39,7 @@ namespace Printers.Controllers
 
             using (IDbConnection db = new SqlConnection(constr))
             {
-                printers = db.Query<PrintersView>("select * from dbo.PrintersView order by id desc").ToList();
+                printers = db.Query<PrintersView>("select * from dbo.PrintersView ORDER BY ID DESC").ToList();
             }
             ViewBag.Title = "Справочник техники организации";
             ViewBag.Message = "Выберите устройство";
@@ -89,8 +89,6 @@ namespace Printers.Controllers
             }
             catch(Exception ex)
             {
-                
-
                 model.GetBuilding = listsService.GetBuildings();
                 model.GetCabinet = listsService.GetCabinets(model.Movement.BuildingNewID);
                 model.GetPerformer = listsService.GetPerformers();
@@ -104,16 +102,30 @@ namespace Printers.Controllers
         {
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<Movement>($"INSERT INTO dbo.Movement (PrinterID,BuildingOldID,CabinetOldID,BuildingNewID,CabinetNewID,PerformerID,MoveDate,IP) VALUES ({model.PrinterID}, {model.BuildingOldID}, {model.CabinetOldID}, {model.BuildingNewID}, {model.CabinetNewID}, {model.PerformerID}, '{model.MoveDate}', '{model.IP}')").FirstOrDefault();
+                model = db.Query<Movement>($"INSERT INTO dbo.Movement (PrinterID,BuildingOldID,CabinetOldID,BuildingNewID,CabinetNewID,PerformerID,MoveDate,IP) VALUES ({model.PrinterID}, {model.BuildingOldID}, {model.CabinetOldID}, {model.BuildingNewID}, {model.CabinetNewID}, {model.PerformerID}, '{model.MoveDate:yyyy-MM-dd HH:mm:ss}', '{model.IP}')").FirstOrDefault();
             }
             return;
         }
 
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var moveDelete = new MovementView();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                moveDelete = db.Query<MovementView>($"select * from dbo.movementView where ID = {id}").FirstOrDefault();
+            }
+            return View(moveDelete);
+        }
 
-
-
-
-
-
+        [HttpPost]
+        public ActionResult Delete(MovementView model)
+        {
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                db.Query($"update dbo.Movement set IsDeleted = 1 where id = {model.ID}");
+            }
+            return RedirectToAction("Index", "Movement");
+        }
     }
 }

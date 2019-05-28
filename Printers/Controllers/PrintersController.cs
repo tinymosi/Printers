@@ -24,7 +24,7 @@ namespace Printers.Controllers
 
             using (IDbConnection db = new SqlConnection(constr))
             {
-                printers = db.Query<PrintersView>("select * from dbo.PrintersView order by id desc").ToList();
+                printers = db.Query<PrintersView>("select * from dbo.PrintersView ORDER BY ID DESC").ToList();
             }
             ViewBag.Title = "Справочник техники организации";
             //ViewBag.Message = "";
@@ -33,14 +33,20 @@ namespace Printers.Controllers
         }
 
         // Printers Create
-        public ActionResult Create()
+        public ActionResult Create(int? ID = null)
         {
-            var model = new PrintersList()
+            var model = new PrintersList();
+
+            using (IDbConnection db = new SqlConnection(constr))
             {
-                Printer = new Printer() { PurchaseDate = DateTime.Now },
-                GetPrintersBrands = listsService.GetPrintersBrands(),
-                GetPrintersModels = new List<SelectListItem>(),
-                GetStatus = listsService.GetStatus(),
+                if (ID != null)
+                {
+                    model = db.Query<PrintersList>($"select * from dbo.Printers where ID = {ID}").FirstOrDefault();
+                }
+                model.Printer = new Printer() { PurchaseDate = DateTime.Now };
+                model.GetPrintersBrands = listsService.GetPrintersBrands();
+                model.GetPrintersModels = new List<SelectListItem>();
+                model.GetStatus = listsService.GetStatus();
             };
             return View(model);
         }
@@ -54,7 +60,7 @@ namespace Printers.Controllers
                 AddPrinter(model.Printer);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 model.GetPrintersBrands = listsService.GetPrintersBrands();
                 model.GetPrintersModels = listsService.GetPrintersModels(model.Printer.PrinterBrandID);
@@ -79,6 +85,27 @@ namespace Printers.Controllers
         {
             var printermodels = listsService.GetPrintersModels(id);
             return Json(printermodels);
+        }
+        
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var printerDelete = new PrintersView();
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                printerDelete = db.Query<PrintersView>($"select * from dbo.printersView where ID = {id}").FirstOrDefault();
+            }
+            return View(printerDelete);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(PrintersView model)
+        {
+            using (IDbConnection db = new SqlConnection(constr))
+            {
+                db.Query($"update dbo.printers set IsDeleted = 1 where id = {model.ID}");
+            }
+            return RedirectToAction("Index", "Printers");
         }
     }
 }

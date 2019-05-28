@@ -22,7 +22,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Принтера", "Index", "Printers")</li>
+                    <li>@Html.ActionLink("Устройства", "Index", "Printers")</li>
+                    <li>@Html.ActionLink("Справочник", "Index", "Sourcebook")</li>
                     <li>@Html.ActionLink("Картриджи", "Index", "Cartridges")</li>
                     <li>@Html.ActionLink("Кабинеты", "Index", "Cabinets")</li>
                     <li>@Html.ActionLink("Сотрудники", "Index", "Performers")</li>
@@ -40,6 +41,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/selectCabinet")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -6,8 +6,6 @@ public class Cabinets
 
     public int BuildingID { get; set; }
 
-    [Required(ErrorMessage = "Введите кабинет")]
-    [Display(Name = "Номер кабинета")]
     public string Number { get; set; }
 
     public bool IsDeleted { get; set; }

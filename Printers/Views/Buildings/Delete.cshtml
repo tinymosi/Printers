@@ -1,0 +1,27 @@
+﻿@model Printers.ViewModels.Buildings.BuildingViewModel
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BuildingViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Building)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Building)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m=> m.ID)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", "Cabinets")
+        </div>
+    }
+</div>

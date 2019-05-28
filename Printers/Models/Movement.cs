@@ -19,8 +19,8 @@ public class Movement
 
     public int PerformerID { get; set; }
 
-    [DataType(DataType.Date)]
-    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
+    [DataType(DataType.DateTime)]
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy HH:mm:ss}")]
     public DateTime MoveDate { get; set; }
 
     public string IP { get; set; }

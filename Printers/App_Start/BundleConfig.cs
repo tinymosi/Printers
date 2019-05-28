@@ -40,6 +40,8 @@ namespace Printers
 
             bundles.Add(new ScriptBundle("~/bundles/search").Include(
                 "~/Scripts/Site/Search.js"));
+            bundles.Add(new ScriptBundle("~/bundles/selectCabinet").Include(
+                "~/Scripts/Site/SelectCabinet.js"));
         }
     }
 }
