@@ -176,6 +176,7 @@
     <Compile Include="ViewModels\Cabinets\ListItemViewModel.cs" />
     <Compile Include="ViewModels\Cartridges\CreateViewModel.cs" />
     <Compile Include="ViewModels\Cartridges\ListItemViewModel.cs" />
+    <Compile Include="ViewModels\Models\CreateViewModel.cs" />
     <Compile Include="ViewModels\Models\PrinterModelView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +248,10 @@
     <Content Include="Views\Sourcebook\_Brands.cshtml" />
     <Content Include="Views\Sourcebook\_Models.cshtml" />
     <Content Include="Views\Sourcebook\Index.cshtml" />
+    <Content Include="Views\Sourcebook\CreateBrand.cshtml" />
+    <Content Include="Views\Sourcebook\CreateModel.cshtml" />
+    <Content Include="Views\Sourcebook\DeleteModel.cshtml" />
+    <Content Include="Views\Sourcebook\DeleteBrand.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

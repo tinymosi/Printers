@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Printers.ViewModels.Models
 {
@@ -13,6 +14,8 @@ namespace Printers.ViewModels.Models
         [Display(Name = "Бренд")]
         [Required(ErrorMessage = "Выберте бренд")]
         public string PrinterBrand { get; set; }
+
+        public List<SelectListItem> GetBrands { get; set; }
 
         [Display(Name = "Модель")]
         [Required(ErrorMessage = "Введите название модели")]
