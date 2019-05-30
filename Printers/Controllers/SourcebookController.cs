@@ -21,7 +21,7 @@ namespace Printers.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Справочник";
-            ViewBag.Message = "Справочник наименований техники.";
+            ViewBag.Message = "Справочник наименований техники предприятия.";
             return View();
         }
 
@@ -31,7 +31,7 @@ namespace Printers.Controllers
 
             using (IDbConnection db = new SqlConnection(constr))
             {
-                brands = db.Query<PrintBrands>("SELECT PrinterBrand FROM dbo.PrintBrands WHERE IsDeleted = 0").ToList();
+                brands = db.Query<PrintBrands>("SELECT ID, PrinterBrand FROM dbo.PrintBrands WHERE IsDeleted = 0").ToList();
             }
             return PartialView("_Brands", brands);
         }
@@ -42,9 +42,10 @@ namespace Printers.Controllers
 
             using (IDbConnection db = new SqlConnection(constr))
             {
-                models = db.Query<PrinterModelView>("SELECT dbo.PrintBrands.PrinterBrand, dbo.PrintModels.PrinterModel " +
+                models = db.Query<PrinterModelView>("SELECT dbo.PrintModels.ID, dbo.PrintBrands.PrinterBrand, dbo.PrintModels.PrinterModel " +
                     "FROM dbo.PrintBrands INNER JOIN " +
-                         "dbo.PrintModels ON dbo.PrintBrands.ID = dbo.PrintModels.PrinterBrandID").ToList();
+                         "dbo.PrintModels ON dbo.PrintBrands.ID = dbo.PrintModels.PrinterBrandID " +
+                         "WHERE dbo.PrintModels.IsDeleted = 0").ToList();
             }
             return PartialView("_Models", models);
         }
