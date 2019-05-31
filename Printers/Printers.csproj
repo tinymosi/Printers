@@ -178,6 +178,8 @@
     <Compile Include="ViewModels\Cartridges\ListItemViewModel.cs" />
     <Compile Include="ViewModels\Models\CreateViewModel.cs" />
     <Compile Include="ViewModels\Models\PrinterModelView.cs" />
+    <Compile Include="ViewModels\Printers\CreateViewModel.cs" />
+    <Compile Include="ViewModels\Printers\ListItemViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Database.mdf" />
@@ -252,6 +254,7 @@
     <Content Include="Views\Sourcebook\CreateModel.cshtml" />
     <Content Include="Views\Sourcebook\DeleteModel.cshtml" />
     <Content Include="Views\Sourcebook\DeleteBrand.cshtml" />
+    <Content Include="Views\Printers\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

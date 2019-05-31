@@ -1,4 +1,4 @@
-﻿@model Printers.Models.ListModels.PrintersList
+﻿@model Printers.ViewModels.Printers.CreateViewModel
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -15,42 +15,42 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Printer.PrinterBrandID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PrinterBrandID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Printer.PrinterBrandID, Model.GetPrintersBrands, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Printer.PrinterBrandID, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.PrinterBrandID, Model.GetPrintersBrands, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrinterBrandID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Printer.PrinterModelID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PrinterModelID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Printer.PrinterModel, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Printer.PrinterModelID, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.PrinterModelID, Model.GetPrintersModels, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PrinterModelID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Printer.InventoryNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.InventoryNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Printer.InventoryNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Printer.InventoryNumber, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.InventoryNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.InventoryNumber, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Printer.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PurchaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Printer.PurchaseDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Printer.PurchaseDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PurchaseDate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Printer.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Printer.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Printer.Price, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
 

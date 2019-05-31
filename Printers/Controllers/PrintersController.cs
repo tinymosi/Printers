@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using Dapper;
 using Printers.Models.ListModels;
 using Printers.Services;
+using Printers.ViewModels.Printers;
 
 namespace Printers.Controllers
 {
@@ -35,47 +37,69 @@ namespace Printers.Controllers
         // Printers Create
         public ActionResult Create(int? ID = null)
         {
-            var model = new PrintersList();
+            var model = new CreateViewModel();
 
             using (IDbConnection db = new SqlConnection(constr))
             {
                 if (ID != null)
                 {
-                    model = db.Query<PrintersList>($"select * from dbo.Printers where ID = {ID}").FirstOrDefault();
+                    model = db.Query<CreateViewModel>($"select * from dbo.Printer where ID = {ID}").FirstOrDefault();
+                    model.PrinterBrandID = db.Query<int>($"select PrinterBrandID from dbo.PrintModels where ID = {model.PrinterModelID}").FirstOrDefault();
+                    model.GetPrintersBrands = listsService.GetPrintersBrands();
+                    model.GetPrintersModels = listsService.GetPrintersModels(model.PrinterBrandID);
                 }
-                model.Printer = new Printer() { PurchaseDate = DateTime.Now };
-                model.GetPrintersBrands = listsService.GetPrintersBrands();
-                model.GetPrintersModels = new List<SelectListItem>();
-                model.GetStatus = listsService.GetStatus();
+                else
+                {
+                    model.PurchaseDate = DateTime.Now;
+                    model.GetPrintersBrands = listsService.GetPrintersBrands();
+                    model.GetPrintersModels = listsService.GetPrintersModels(int.Parse(model.GetPrintersBrands.FirstOrDefault().Value));
+                }              
             };
             return View(model);
         }
 
         //POST: Printers Create
         [HttpPost]
-        public ActionResult Create(PrintersList model)
+        public ActionResult Create(CreateViewModel model)
         {
             try
             {
-                AddPrinter(model.Printer);
+                AddPrinter(model);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 model.GetPrintersBrands = listsService.GetPrintersBrands();
-                model.GetPrintersModels = listsService.GetPrintersModels(model.Printer.PrinterBrandID);
-                model.GetStatus = listsService.GetStatus();
+                model.GetPrintersModels = listsService.GetPrintersModels(model.PrinterBrandID);
                 return View(model);
             }
 
         }
 
         //SEND: Printers Create
-        public void AddPrinter(Printer model)
+        public void AddPrinter(CreateViewModel model)
         {
             using (IDbConnection db = new SqlConnection(constr))
             {
-                model = db.Query<Printer>($"insert into dbo.Printer (PrinterModelID, InventoryNumber, PurchaseDate, Price) values ({model.PrinterModelID}, {model.InventoryNumber}, {model.PurchaseDate}, {model.Price})").FirstOrDefault();
+                string price = model.Price?.ToString(CultureInfo.InvariantCulture) ?? "NULL";
+
+                if (model.ID != 0)
+                {
+                    string query = $"UPDATE dbo.Printer set PrinterModelID = {model.PrinterModelID}, InventoryNumber = '{model.InventoryNumber}', PurchaseDate = '{model.PurchaseDate:yyyy-MM-dd}', Price = {price} WHERE ID = {model.ID}";
+                    db.Query(query);
+                }
+                else
+                {
+                    string query = $"insert into dbo.Printer (PrinterModelID, InventoryNumber, PurchaseDate, Price) values ({model.PrinterModelID}, '{model.InventoryNumber}', '{model.PurchaseDate:yyyy-MM-dd}', {price}); select scope_identity();";
+                    int? printerID = db.Query<int?>(query).FirstOrDefault();
+
+                    if (printerID != null)
+                    {
+                        db.Query($"INSERT INTO dbo.Movement (PrinterID,BuildingOldID,CabinetOldID,BuildingNewID,CabinetNewID,PerformerID,MoveDate) VALUES ({printerID}, 9, 44, 2, 27, 1, '{model.PurchaseDate:yyyy-MM-dd}')");
+                    }
+                }
+                
+                
             }
             return;
         }
@@ -103,7 +127,7 @@ namespace Printers.Controllers
         {
             using (IDbConnection db = new SqlConnection(constr))
             {
-                db.Query($"update dbo.printers set IsDeleted = 1 where id = {model.ID}");
+                db.Query($"update dbo.Printer set IsDeleted = 1 where id = {model.ID}");
             }
             return RedirectToAction("Index", "Printers");
         }

@@ -1,20 +1,20 @@
 ﻿$(document).ready(function () {
-    $("#Printer_PrinterBrandID").change(function () {
+    $("#PrinterBrandID").change(function () {
         var brandId = this.value;
 
         $.post({
-            url: "GetPrintersModelsList",
+            url: "/Printers/GetPrintersModels",
             data: { id: brandId },
             success: function (data) {
-                $("#Printer_PrinterModelID").empty();
+                $("#PrinterModelID").empty();
                 data.forEach(function (el) {
-                    $("#Printer_PrinterModelID").append($("<option/>").val(el.Value).text(el.Text));
+                    $("#PrinterModelID").append($("<option/>").val(el.Value).text(el.Text));
                 });                
             }
         });
     });
 
-    $("#Printer_Price").inputmask({
+    $("#Price").inputmask({
         alias: "decimal",
         digits: 2,
         radixPoint: ",",

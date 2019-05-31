@@ -16,5 +16,7 @@ namespace Printers.Models.ListModels
         //public List<SelectListItem> GetCabinets { get; set; }
 
         public List<SelectListItem> GetStatus { get; set; }
+
+
     }
 }

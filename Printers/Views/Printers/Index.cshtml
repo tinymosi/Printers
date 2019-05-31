@@ -72,11 +72,11 @@
                 @(item.PurchaseDate == DateTime.MinValue ? "—" : Html.DisplayFor(modelItem => item.PurchaseDate).ToString())
             </td>
             <td>
-                @(item.Price ?? "Не указана")
+                @(item.Price == null? "Не указана" : item.Price + " руб")
             </td>
             <td class="text-right">
                 <div class="btn-group" role="group" aria-label="...">
-                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "Edit", new { id = item.ID })
+                    <a class="btn btn-info btn-sm" @Html.ActionLink("Изменить", "Create", new { id = item.ID })
                     <a class="btn btn-danger btn-sm" @Html.ActionLink("Удалить", "Delete", new { id = item.ID })
                 </div>
             </td>

@@ -13,7 +13,7 @@ public class Printer
     public string InventoryNumber { get; set; }
 
     [Display(Name = "Дата покупки")]
-    [DataType(DataType.Date)]
+    [DataType(DataType.DateTime)]
     [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
     public DateTime PurchaseDate { get; set; }
 
